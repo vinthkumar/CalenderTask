@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: poppins;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.rbc-event.rbc-selected,
+.rbc-day-slot .rbc-selected.rbc-background-event {
+  background-color: #bbe5f0 !important;
+}
+
+.rbc-event,
+.rbc-day-slot .rbc-background-event {
+  border: 0 !important;
+  box-sizing: border-box;
+  box-shadow: none;
+  margin: 0;
+  padding: 2px 5px;
+  background-color: #ffffff !important;
+  border-radius: 5px;
+  color: #000000 !important;
+  border-left: 20px solid #165bbb !important;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  display: inline-block !important;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px !important;
+}
+
+.rbc-calendar {
+  background-color: #f3fcff !important;
+}
+
+.rbc-event-label {
+  font-size: 80%;
+  display: none !important;
+}
+
+
+.rbc-day-slot .rbc-event,
+.rbc-day-slot .rbc-background-event {
+  border: none;
+  min-height: 60px !important;
+  flex-flow: column wrap;
+  padding: 2px 5px;
+}
+
+.rbc-day-slot .rbc-events-container {
+  margin-right: 0px !important;
+}
+
+.rbc-day-slot .rbc-event-content {
+  line-height: 1.5 !important;
+}
+
+.custom-button {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 8px;
+  width: 200px;
+  height: 50px;
+  background-color: white;
+  border: 1px solid #005dad;
+  color: #005dad;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-button .icon {
+  font-size: 22px;
+}
+
+.custom-button:hover {
+  background-color: #005dad;
+  color: white;
+}
+
+.custom-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #005dad;
+}
+
+.rbc-month-view {
+  overflow-x: auto !important;
+}
+
+.rbc-month-header {
+  white-space: nowrap !important;
+}
+
+.rbc-month-row {
+  overflow: visible !important;
+}
+
+
+.rbc-label {
+  color: #2a7ad2 !important;
+  font-weight: 500 !important;
+}
+
+.rbc-toolbar button {
+  /* border: none !important; */
+  /* border-radius: 0px !important; */
+  cursor: pointer !important;
+}
