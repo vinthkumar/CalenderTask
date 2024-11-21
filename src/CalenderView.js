@@ -283,15 +283,17 @@ function CalendarComponent() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-78%, -0%)",
+            transform: "translate(-78%, 0%)",
             width: "350px",
-            height: "200px",
+            maxHeight: "200px",
             backgroundColor: "#ffffff",
             border: "1px solid #ddd",
             zIndex: 9999,
             padding: "10px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-            overflowY: "auto",
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <div
@@ -300,7 +302,8 @@ function CalendarComponent() {
               justifyContent: "space-between",
               alignItems: "center",
               padding: "10px 0",
-              borderBottom: "1px solid  #ccc",
+              borderBottom: "1px solid #ccc",
+              marginBottom: "10px",
             }}
           >
             <h3 style={{ margin: 0 }}>Meetings</h3>
@@ -309,7 +312,7 @@ function CalendarComponent() {
                 backgroundColor: "#265985",
                 color: "white",
                 border: "none",
-                padding: "4px 8px",
+                padding: "6px 10px",
                 borderRadius: "100px",
                 cursor: "pointer",
               }}
@@ -319,13 +322,24 @@ function CalendarComponent() {
             </button>
           </div>
 
-          <ul style={{ listStyle: "none", padding: 0, fontSize: "12px" }}>
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 0,
+              fontSize: "12px",
+              margin: 0,
+              overflowY: "auto",
+              flex: 1,
+              paddingRight: "5px",
+            }}
+          >
             {overlappingEvents.map((event, index) => (
               <li
                 key={index}
                 style={{
                   marginBottom: "20px",
-                  listStyleType: "none",
+                  paddingBottom: "10px",
+                  borderBottom: "1px solid #eee",
                 }}
               >
                 <strong
@@ -348,20 +362,15 @@ function CalendarComponent() {
                 <div
                   style={{
                     display: "flex",
+                    flexWrap: "wrap",
                     alignItems: "center",
-                    borderBottom: "1px solid #ccc",
-                    paddingBottom: "10px",
+                    gap: "10px",
                   }}
                 >
-                  <span
-                    style={{
-                      marginRight: "10px",
-                    }}
-                  >
+                  <span>
                     Date: {moment(event.start).format("D MMMM, YYYY")}
                   </span>
-                  {" | "}
-                  <span style={{ marginLeft: "10px" }}>
+                  <span>
                     Time: {moment(event.start).format("h:mm A")} -{" "}
                     {moment(event.end).format("h:mm A")}
                   </span>
