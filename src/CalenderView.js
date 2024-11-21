@@ -34,6 +34,7 @@ function CalendarComponent() {
               candidate:
                 item.user_det?.candidate?.candidate_firstName ||
                 "candidate not found",
+              meetinglink: item.link || "No meeting Links",
             }))
           : [];
         const groupedEvents = groupOverlappingEvents(mappedEvents);
@@ -126,6 +127,14 @@ function CalendarComponent() {
     setShowEventDetail(true);
   };
 
+  const LinkEventClick = (event) => {
+    if (selectedEvent.meetinglink) {
+      window.open(selectedEvent.meetinglink, "_blank", "noopener noreferrer");
+    } else {
+      alert("Meeting link is not available.");
+    }
+  };
+
   const closeEventDetailPopup = () => {
     setShowEventDetail(false);
   };
@@ -133,6 +142,7 @@ function CalendarComponent() {
   const CustomToolbar = (toolbar: any) => {
     const goToView = (viewType: string) => {
       setView(viewType);
+      setSelectedEvent(null);
     };
 
     const isActiveView = (viewType: string) => {
@@ -165,7 +175,10 @@ function CalendarComponent() {
               fontWeight: "700",
               color: "#ccc",
             }}
-            onClick={() => toolbar.onNavigate("PREV")}
+            onClick={() => {
+              toolbar.onNavigate("PREV");
+              setSelectedEvent(null);
+            }}
           >
             {"<"}
           </button>
@@ -181,7 +194,10 @@ function CalendarComponent() {
               fontWeight: "700",
               color: "#ccc",
             }}
-            onClick={() => toolbar.onNavigate("NEXT")}
+            onClick={() => {
+              toolbar.onNavigate("NEXT");
+              setSelectedEvent(null);
+            }}
           >
             {">"}
           </button>
@@ -262,12 +278,20 @@ function CalendarComponent() {
       </div>
       {selectedEvent && !showEventDetail && (
         <div
-          className="sidebar"
+          className="event-details"
           style={{
-            width: "300px",
-            padding: "20px",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-78%, -0%)",
+            width: "350px",
+            height: "200px",
             backgroundColor: "#ffffff",
-            borderLeft: "1px solid #ddd",
+            border: "1px solid #ddd",
+            zIndex: 9999,
+            padding: "10px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            overflowY: "auto",
           }}
         >
           <div
@@ -429,6 +453,21 @@ function CalendarComponent() {
               <p style={{ marginTop: "20px" }}>
                 <strong>Interview Via: </strong>Google Meet
               </p>
+              <p>
+                <strong>Link: </strong>
+                {selectedEvent.meetinglink ? (
+                  <a
+                    href={selectedEvent.meetinglink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline"
+                  >
+                    {selectedEvent.meetinglink}
+                  </a>
+                ) : (
+                  "No link available"
+                )}
+              </p>
               <button className="custom-button">
                 Resume Docx
                 <span className="icon" style={{ paddingLeft: "15px" }}>
@@ -477,7 +516,9 @@ function CalendarComponent() {
                   padding: "6px 20px 6px 20px",
                   border: "none",
                   color: "#ffffff",
+                  cursor: "pointer",
                 }}
+                onClick={LinkEventClick}
               >
                 Join
               </button>
