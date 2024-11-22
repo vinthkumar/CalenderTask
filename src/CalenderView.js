@@ -82,9 +82,17 @@ function CalendarComponent() {
   };
 
   const handleSelectEvent = (event) => {
-    setSelectedEvent(event);
-    setOverlappingEvents(event.overlappingEvents || []);
+    if (event.count > 1) {
+      setSelectedEvent(event);
+      setOverlappingEvents(event.overlappingEvents || []);
+    } else {
+      setShowEventDetail(true);
+      setOverlappingEvents([]); 
+      setSelectedEvent(event); 
+    }
   };
+
+  
 
   const EventWithNotification = ({ event }) => (
     <div style={{ position: "relative" }}>
@@ -135,7 +143,11 @@ function CalendarComponent() {
     }
   };
 
+
   const closeEventDetailPopup = () => {
+    if (selectedEvent && selectedEvent.count === 1) {
+      setSelectedEvent(null);
+    }
     setShowEventDetail(false);
   };
 
@@ -340,16 +352,16 @@ function CalendarComponent() {
                   marginBottom: "20px",
                   paddingBottom: "10px",
                   borderBottom: "1px solid #eee",
+                  cursor: "pointer",
                 }}
+                onClick={() => handleEventDetailClick(event)}
               >
                 <strong
                   style={{
                     fontSize: "1.3em",
                     marginBottom: "5px",
                     display: "block",
-                    cursor: "pointer",
                   }}
-                  onClick={() => handleEventDetailClick(event)}
                 >
                   {event.title}
                 </strong>
